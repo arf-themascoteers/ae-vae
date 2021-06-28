@@ -11,12 +11,7 @@ class VAELinear(nn.Module):
         self.decoder = Decoder()
 
     def forward(self, x):
-        mean, log_var = self.encoder(x)
-        z = self.reparameterization(mean, log_var)
+        mean, log_var, z = self.encoder(x)
         decoded = self.decoder(z)
         return decoded, mean, log_var
 
-    def reparameterization(self, mean, var):
-        epsilon = torch.randn_like(var)
-        z = mean + var*epsilon
-        return z

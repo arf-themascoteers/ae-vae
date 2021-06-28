@@ -21,7 +21,7 @@ model = vae.VAELinear()
 model.train()
 optimizer = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-5)
 writer = SummaryWriter()
-num_epochs = 10
+num_epochs = 5
 outputs = []
 for epoch in range(num_epochs):
     first = True

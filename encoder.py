@@ -1,4 +1,5 @@
 import torch.nn as nn
+import torch
 
 class Encoder(nn.Module):
     def __init__(self):
@@ -16,5 +17,10 @@ class Encoder(nn.Module):
         x = self.lrelu(x)
         mean = self.mean(x)
         var = self.log_var(x)
-        return mean, var
+        return mean, var, self.reparameterization(mean, var)
+
+    def reparameterization(self, mean, var):
+        epsilon = torch.randn_like(var)
+        z = mean + var*epsilon
+        return z
 
